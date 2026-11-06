@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NOAA-20 ATMS-TR Retrievals</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>NOAA-20 ATMS-TR retrievals</h1>
+    <p class="sub" id="generated">Loading…</p>
+  </div>
+</header>
+
+<section class="controls" aria-label="Map options">
+  <label>Day <select id="day"></select></label>
+  <div class="seg" role="group" aria-label="Pass" id="pass">
+    <button data-v="ascending">Ascending</button>
+    <button data-v="descending">Descending</button>
+  </div>
+  <div class="seg" role="group" aria-label="Field" id="var">
+    <button data-v="t">Temperature</button>
+    <button data-v="q">Water vapour</button>
+  </div>
+  <div class="seg" role="group" aria-label="View" id="view">
+    <button data-v="value">Retrieval</button>
+    <button data-v="ifs">− IFS</button>
+    <button data-v="era5">− ERA5</button>
+  </div>
+  <label>Level <select id="lev"></select></label>
+</section>
+
+<main class="layout">
+  <section class="panel map-panel">
+    <h2 id="map-title">Map</h2>
+    <div class="map-wrap" id="map-wrap">
+      <img id="map" alt="Global map of the selected field" draggable="false">
+      <div id="marker" class="marker" hidden></div>
+    </div>
+    <div class="cbar">
+      <div class="cbar-ramp" id="cbar-ramp"></div>
+      <div class="cbar-labels"><span id="cbar-lo"></span><span id="cbar-mid"></span><span id="cbar-hi"></span></div>
+      <div class="cbar-title" id="cbar-title"></div>
+    </div>
+    <p class="hint" id="view-hint"></p>
+  </section>
+
+  <section class="panel skew-panel">
+    <h2>Skew-T</h2>
+    <form class="point" id="point">
+      <label>Lat <input id="in-lat" inputmode="decimal" placeholder="40.82" size="7"></label>
+      <label>Lon <input id="in-lon" inputmode="decimal" placeholder="−73.95" size="7"></label>
+      <button type="submit">Show</button>
+      <button type="button" id="ccny" class="link">CCNY</button>
+    </form>
+    <p class="info" id="info">Click the map or enter a point.</p>
+    <div id="skewt"></div>
+    <p class="hint" id="readout"></p>
+    <div class="legend" id="legend" hidden></div>
+  </section>
+</main>
+
+<section class="panel stats-panel" id="stats-panel" hidden>
+  <h2>Retrieval vs reference: bias and RMSE by level</h2>
+  <div id="stats"></div>
+</section>
+
+<footer class="foot">
+  Retrievals: ATMS-TR temperature and water-vapour retrievals from NOAA-20 ATMS
+  (input data: NOAA Open Data Dissemination). Maps show the latest observation in each
+  0.4° cell. References, matched in space and time to each footprint: ECMWF IFS open data
+  (© ECMWF, CC BY 4.0) and ERA5 (contains modified Copernicus Climate Change Service
+  information). Results are experimental.
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
